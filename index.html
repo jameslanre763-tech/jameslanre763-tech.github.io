@@ -13,17 +13,19 @@
 <body>
 
     <!-- NAVIGATION -->
-    <nav>
-        <h2>Lanre.</h2>
+   <nav>
+    <h2>Lanre.</h2>
 
-        <div class="nav-links">
-            <a href="#home">Home</a>
-            <a href="#about">About</a>
-            <a href="#skills">Skills</a>
-            <a href="#projects">Projects</a>
-            <a href="#contact">Contact</a>
-        </div>
-    </nav>
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+
+    <div class="nav-links" id="navLinks">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+    </div>
+</nav>
 
 
     <!-- HERO -->
@@ -141,6 +143,11 @@
 
     </footer>
 
+    <script>
+        function toggleMenu() {
+            document.getElementById("navLinks").classList.toggle("active");
+        }
+    </script>
 </body>
 
 </html>
