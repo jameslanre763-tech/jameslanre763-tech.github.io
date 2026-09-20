@@ -783,3 +783,114 @@ section {
         display: flex;
     }
 }
+/* SMOOTH SCROLLING */
+html {
+    scroll-behavior: smooth;
+}
+
+/* SECTION ANIMATION */
+section {
+    animation: fadeIn 0.8s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+/* SKILL HOVER EFFECT */
+.skill {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.skill:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+}
+/* PROJECT CARD HOVER EFFECT */
+.project-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+}
+/* CONTACT BUTTON */
+.contact-btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 9px 18px;
+    background: #25D366;
+    color: white;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: bold;
+    font-size: 14px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contact-btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+/* GITHUB BUTTON */
+.github-btn {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 9px 18px;
+    background: #333;
+    color: white;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: bold;
+    font-size: 14px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.github-btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+/* HERO NAME */
+.hero-content h1 span {
+    color: #25D366;
+}
+/* HERO BUTTON */
+.hero-btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background: #25D366;
+    color: white;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: bold;
+    font-size: 14px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hero-btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+/* SKILL BADGES */
+.skill {
+    padding: 12px 20px;
+    border-radius: 25px;
+    font-weight: bold;
+    text-align: center;
+    cursor: default;
+}
+/* STICKY NAVBAR */
+nav {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+}
