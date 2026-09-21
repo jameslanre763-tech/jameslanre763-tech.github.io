@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lanre Expense Tracker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="app">
+        <header>
+            <h1>Lanre Expense Tracker</h1>
+            <p>Track your spending with ease 💰</p>
+        </header>
+
+        <section class="summary">
+            <h2>Total Spent</h2>
+            <p id="total">₦0.00</p>
+        </section>
+
+        <section class="expense-form">
+            <h2>Add Expense</h2>
+
+            <input
+                type="text"
+                id="expenseName"
+                placeholder="Expense name"
+            >
+
+            <input
+                type="number"
+                id="expenseAmount"
+                placeholder="Amount (₦)"
+            >
+
+            <select id="expenseCategory">
+                <option value="">Select category</option>
+                <option value="Food">Food</option>
+                <option value="Transport">Transport</option>
+                <option value="School">School</option>
+                <option value="Data">Data</option>
+                <option value="Other">Other</option>
+            </select>
+
+            <button onclick="addExpense()">Add Expense</button>
+        </section>
+
+        <section class="expenses">
+            <h2>My Expenses</h2>
+
+            <div id="expenseList">
+                <p class="empty">No expenses yet.</p>
+            </div>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
