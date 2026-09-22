@@ -209,16 +209,7 @@ function updateDashboard() {
         "₦" + (income - expenses).toLocaleString();
 
     displayTransactions();
-    item.innerHTML = `
-    <span>
-        ${transaction.description} —
-        ${transaction.type === "income" ? "+" : "-"}₦${transaction.amount.toLocaleString()}
-    </span>
 
-    <button onclick="deleteTransaction(${transactions.indexOf(transaction)})">
-        Delete
-    </button>
-`;
 }
 
 function displayTransactions() {
