@@ -161,58 +161,81 @@
 </div>
 
 <script>
+ let transactions = JSON.parse(localStorage.getItem("transactions")) || [];
+
+function addTransaction() {
+    const description = document.getElementById("description").value;
+    const amount = Number(document.getElementById("amount").value);
+    const type = document.getElementById("type").value;
+
+    if (description === "" || amount <= 0) {
+        alert("Please enter a description and a valid amount.");
+        return;
+    }
+
+    transactions.push({
+        description: description,
+        amount: amount,
+        type: type
+    });
+
+    localStorage.setItem("transactions", JSON.stringify(transactions));
+
+    document.getElementById("description").value = "";
+    document.getElementById("amount").value = "";
+
+    updateDashboard();
+}
+
+function updateDashboard() {
     let income = 0;
     let expenses = 0;
 
-    function addTransaction() {
-
-        const description = document.getElementById("description").value;
-        const amount = Number(document.getElementById("amount").value);
-        const type = document.getElementById("type").value;
-
-        if (description === "" || amount <= 0) {
-            alert("Please enter a description and a valid amount.");
-            return;
+    transactions.forEach(transaction => {
+        if (transaction.type === "income") {
+            income += transaction.amount;
+        } else {
+            expenses += transaction.amount;
         }
+    });
 
-        const list = document.getElementById("transactionList");
+    document.getElementById("income").textContent =
+        "₦" + income.toLocaleString();
 
-        if (list.children.length === 1 &&
-            list.children[0].textContent === "No transactions yet.") {
-            list.innerHTML = "";
-        }
+    document.getElementById("expenses").textContent =
+        "₦" + expenses.toLocaleString();
 
+    document.getElementById("balance").textContent =
+        "₦" + (income - expenses).toLocaleString();
+
+    displayTransactions();
+}
+
+function displayTransactions() {
+    const list = document.getElementById("transactionList");
+
+    if (transactions.length === 0) {
+        list.innerHTML = "<li>No transactions yet.</li>";
+        return;
+    }
+
+    list.innerHTML = "";
+
+    transactions.forEach(transaction => {
         const item = document.createElement("li");
 
         item.innerHTML = `
-            <span>${description}</span>
-            <span>${type === "income" ? "+" : "-"}₦${amount.toLocaleString()}</span>
+            <span>${transaction.description}</span>
+            <span>
+                ${transaction.type === "income" ? "+" : "-"}₦${transaction.amount.toLocaleString()}
+            </span>
         `;
 
         list.appendChild(item);
+    });
+}
 
-        if (type === "income") {
-            income += amount;
-        } else {
-            expenses += amount;
-        }
-
-        updateDashboard();
-
-        document.getElementById("description").value = "";
-        document.getElementById("amount").value = "";
-    }
-
-    function updateDashboard() {
-        document.getElementById("income").textContent =
-            "₦" + income.toLocaleString();
-
-        document.getElementById("expenses").textContent =
-            "₦" + expenses.toLocaleString();
-
-        document.getElementById("balance").textContent =
-            "₦" + (income - expenses).toLocaleString();
-    }
+updateDashboard();
 </script>
 
 </body>
