@@ -1,1 +1,219 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finance Dashboard</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f6f8;
+            color: #222;
+            padding: 25px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        h1 {
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+        }
+
+        .card p {
+            color: #777;
+            margin-bottom: 8px;
+        }
+
+        .card h2 {
+            font-size: 25px;
+        }
+
+        .section {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+        }
+
+        .section h2 {
+            margin-bottom: 15px;
+        }
+
+        input, select, button {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+
+        button {
+            background: #222;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            opacity: 0.85;
+        }
+
+        .transactions {
+            list-style: none;
+        }
+
+        .transactions li {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        @media (max-width: 700px) {
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            body {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Finance Dashboard</h1>
+    <p class="subtitle">Manage your money and track your spending.</p>
+
+    <div class="cards">
+        <div class="card">
+            <p>Balance</p>
+            <h2 id="balance">₦0</h2>
+        </div>
+
+        <div class="card">
+            <p>Income</p>
+            <h2 id="income">₦0</h2>
+        </div>
+
+        <div class="card">
+            <p>Expenses</p>
+            <h2 id="expenses">₦0</h2>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Add Transaction</h2>
+
+        <input type="text" id="description" placeholder="Description">
+
+        <input type="number" id="amount" placeholder="Amount">
+
+        <select id="type">
+            <option value="income">Income</option>
+            <option value="expense">Expense</option>
+        </select>
+
+        <button onclick="addTransaction()">Add Transaction</button>
+    </div>
+
+    <div class="section">
+        <h2>Transactions</h2>
+
+        <ul class="transactions" id="transactionList">
+            <li>No transactions yet.</li>
+        </ul>
+    </div>
+
+</div>
+
+<script>
+    let income = 0;
+    let expenses = 0;
+
+    function addTransaction() {
+
+        const description = document.getElementById("description").value;
+        const amount = Number(document.getElementById("amount").value);
+        const type = document.getElementById("type").value;
+
+        if (description === "" || amount <= 0) {
+            alert("Please enter a description and a valid amount.");
+            return;
+        }
+
+        const list = document.getElementById("transactionList");
+
+        if (list.children.length === 1 &&
+            list.children[0].textContent === "No transactions yet.") {
+            list.innerHTML = "";
+        }
+
+        const item = document.createElement("li");
+
+        item.innerHTML = `
+            <span>${description}</span>
+            <span>${type === "income" ? "+" : "-"}₦${amount.toLocaleString()}</span>
+        `;
+
+        list.appendChild(item);
+
+        if (type === "income") {
+            income += amount;
+        } else {
+            expenses += amount;
+        }
+
+        updateDashboard();
+
+        document.getElementById("description").value = "";
+        document.getElementById("amount").value = "";
+    }
+
+    function updateDashboard() {
+        document.getElementById("income").textContent =
+            "₦" + income.toLocaleString();
+
+        document.getElementById("expenses").textContent =
+            "₦" + expenses.toLocaleString();
+
+        document.getElementById("balance").textContent =
+            "₦" + (income - expenses).toLocaleString();
+    }
+</script>
+
+</body>
+</html>
